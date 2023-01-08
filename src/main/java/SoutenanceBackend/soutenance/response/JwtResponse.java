@@ -7,12 +7,14 @@ public class JwtResponse {
     private String type = "Bearer";
     private Long id;
     private String numero;
+    private String nomcomplet;
     private String email;
     private List<String> roles;
 
-    public JwtResponse(String accessToken, Long id, String numero, String email, List<String> roles) {
+    public JwtResponse(String accessToken, Long id, String nomcomplet, String numero, String email, List<String> roles) {
         this.token = accessToken;
         this.id = id;
+        this.nomcomplet= nomcomplet;
         this.numero = numero;
         this.email = email;
         this.roles = roles;
@@ -48,6 +50,14 @@ public class JwtResponse {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNomcomplet() {
+        return nomcomplet;
+    }
+
+    public void setNomcomplet(String nomcomplet) {
+        this.nomcomplet = nomcomplet;
     }
 
     public String getNumero() {

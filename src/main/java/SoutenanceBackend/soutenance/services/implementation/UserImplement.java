@@ -68,8 +68,8 @@ public class UserImplement implements UserService {
         user.getRoles().add(role);
     }
 
-    @Override
+    /*@Override
     public User getUser(String numero) {
         return null;
-    }
+    }*/
 }

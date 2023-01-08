@@ -65,7 +65,8 @@ public class AuthController {
         .collect(Collectors.toList());
 
     return ResponseEntity.ok(new JwtResponse(jwt,
-                         userDetails.getId(), 
+                         userDetails.getId(),
+                         userDetails.getNomcomplet(),
                          userDetails.getUsername(), 
                          userDetails.getEmail(), 
                          roles));
@@ -76,19 +77,19 @@ public class AuthController {
     if (userRepository.existsByNumero(signUpRequest.getNumero())) {
       return ResponseEntity
           .badRequest()
-          .body(new MessageResponse("Error: Username is already taken!"));
+          .body(new MessageResponse("Erreur: Numéro déjà utilisé !"));
     }
 
     if (userRepository.existsByEmail(signUpRequest.getEmail())) {
       return ResponseEntity
           .badRequest()
-          .body(new MessageResponse("Error: Email is already in use!"));
+          .body(new MessageResponse("Erreur: Email déja utilisé !"));
     }
 
 
     // Create new user's account
     if (signUpRequest.getPassword().equals(signUpRequest.getConfirmpassword())){
-      User user = new User(signUpRequest.getNumero(),
+      User user = new User(signUpRequest.getNomcomplet(), signUpRequest.getNumero(),
               signUpRequest.getEmail(),
               encoder.encode(signUpRequest.getPassword()), encoder.encode(signUpRequest.getConfirmpassword()));
 
@@ -100,7 +101,7 @@ public class AuthController {
         if(userRole==null){
           return ResponseEntity
                   .badRequest()
-                  .body(new MessageResponse("Error: Role is not found."));
+                  .body(new MessageResponse("Erreur: Role non trouvé."));
         }else {
           roles.add(userRole);
         }
@@ -111,18 +112,45 @@ public class AuthController {
             case "admin":
               Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN);
               if(adminRole==null){
-                 new RuntimeException("Error: Role is not found.");
+                 new RuntimeException("Erreur: Role non trouvé.");
               }else {
                 roles.add(adminRole);
               }
-                      //.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+
+              break;
+            case "eleve":
+              Role eleveRole = roleRepository.findByName(ERole.ROLE_ELEVE);
+              if(eleveRole==null){
+                new RuntimeException("Erreur: Role non trouvé.");
+              }else {
+                roles.add(eleveRole);
+              }
+
+              break;
+
+            case "etudiant":
+              Role etudiantRole = roleRepository.findByName(ERole.ROLE_ETUDIANT);
+              if(etudiantRole==null){
+                new RuntimeException("Erreur: Role non trouvé.");
+              }else {
+                roles.add(etudiantRole);
+              }
+
+              break;
+            case "professionnel":
+              Role professionnelRole = roleRepository.findByName(ERole.ROLE_PROFESSIONNEL);
+              if(professionnelRole==null){
+                new RuntimeException("Erreur: Role non trouvé.");
+              }else {
+                roles.add(professionnelRole);
+              }
 
               break;
 
             default:
               Role userRole = roleRepository.findByName(ERole.ROLE_USER);
               if(userRole==null){
-                new RuntimeException("Error: Role is not found.");
+                new RuntimeException("Erreur: Role non trouvé.");
               }else {
                 roles.add(userRole);
 
@@ -135,7 +163,7 @@ public class AuthController {
       user.setRoles(roles);
       userRepository.save(user);
 
-      return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+      return ResponseEntity.ok(new MessageResponse(user.getNomcomplet() + " ajouté avec succès !"));
     }else {
       return ResponseEntity.badRequest().body(new MessageResponse("Les mots de passe ne sont pas mêmes "));
     }

@@ -26,6 +26,10 @@ public class SignupRequest {
     @Size(min = 6, max = 40)
     private String confirmpassword;
 
+    @NotBlank
+    @Size(min = 6, max = 40)
+    private String nomcomplet;
+
     public String getNumero() {
         return numero;
     }
@@ -40,6 +44,14 @@ public class SignupRequest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNomcomplet() {
+        return nomcomplet;
+    }
+
+    public void setNomcomplet(String nomcomplet) {
+        this.nomcomplet = nomcomplet;
     }
 
     public String getPassword() {

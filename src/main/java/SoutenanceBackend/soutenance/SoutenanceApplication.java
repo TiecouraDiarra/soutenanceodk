@@ -22,30 +22,10 @@ import static SoutenanceBackend.soutenance.Models.ERole.*;
 
 public class SoutenanceApplication  {
 
-	/*private final RoleRepository roleRepository;
-	private final UserRepository utilisateurRepository;
-
-
-
-	public SoutenanceApplication(RoleRepository roleRepository, UserRepository utilisateurRepository) {
-		this.roleRepository = roleRepository;
-		this.utilisateurRepository = utilisateurRepository;
-	}*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(SoutenanceApplication.class, args);
 	}
-
-	/*@Override
-	public void run(String... args) throws Exception {
-		if (roleRepository.findAll().size()==0){
-			roleRepository.creationRole();
-			utilisateurRepository.creationadmin();
-		}
-
-	}*/
-
-
 
 
 	@Bean
@@ -57,7 +37,7 @@ public class SoutenanceApplication  {
 			Role r4 = userService.saveRole(new Role(null, ROLE_ETUDIANT));
 			Role r5 = userService.saveRole(new Role(null, ROLE_PROFESSIONNEL));
 
-			User u1= userService.saveUser(new User(null, "70804808", "tiec@gmail.com", "1234","1234", new HashSet<>()));
+			User u1= userService.saveUser(new User(null, "Tiecoura DIARRA", "70804808", "tiec@gmail.com", "1234","1234", new HashSet<>()));
 
 			userService.addRoleToUser(u1.getNumero(), r1.getName());
 

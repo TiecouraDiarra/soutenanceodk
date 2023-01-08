@@ -24,6 +24,10 @@ import java.util.Set;
     private Long id;
 
     @NotBlank
+    @Size(max = 120)
+    private String nomcomplet;
+
+    @NotBlank
     @Size(max = 20)
     private String numero;
 
@@ -49,11 +53,13 @@ import java.util.Set;
     public User() {
     }
 
-    public User(String numero, String email, String password, String confirmpassword) {
+    public User(String nomcomplet, String numero, String email, String password, String confirmpassword) {
+        this.nomcomplet = nomcomplet;
         this.numero = numero;
         this.email = email;
         this.password = password;
         this.confirmpassword=confirmpassword;
+
     }
 
 
@@ -72,6 +78,14 @@ import java.util.Set;
 
     public void setUsername(String numero) {
         this.numero = numero;
+    }
+
+    public String getNomcomplet() {
+        return nomcomplet;
+    }
+
+    public void setNomcomplet(String numero) {
+        this.nomcomplet = nomcomplet;
     }
 
     public String getEmail() {
