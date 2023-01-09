@@ -48,6 +48,10 @@ public class Parcours {
     @Size(max = 120)
     private String filiere;
 
+    @NotBlank
+    @Size(max = 120)
+    private String imageparcours;
+
     /*@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(  name = "parcours_matieres",
             joinColumns = @JoinColumn(name = "parcours_id"),
