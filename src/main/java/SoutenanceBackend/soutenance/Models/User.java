@@ -33,7 +33,7 @@ import java.util.Set;
 
     @NotBlank
     @Size(max = 50)
-    @Email
+    @Email(message = "S'il vous plaît veuillez entrer un email valide")
     private String email;
 
     @NotBlank
@@ -43,6 +43,9 @@ import java.util.Set;
     @NotBlank
     @Size(max = 120)
     private String confirmpassword;
+
+    /*@Column(name = "reset_token")
+    private String resetToken;*/
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(  name = "user_roles",
@@ -115,6 +118,14 @@ import java.util.Set;
     public Set<Role> getRoles() {
         return roles;
     }
+
+    /*public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
+    }*/
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;

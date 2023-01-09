@@ -12,6 +12,7 @@ import SoutenanceBackend.soutenance.request.SignupRequest;
 import SoutenanceBackend.soutenance.response.JwtResponse;
 import SoutenanceBackend.soutenance.response.MessageResponse;
 import SoutenanceBackend.soutenance.services.UserDetailsImpl;
+import SoutenanceBackend.soutenance.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -48,6 +49,9 @@ public class AuthController {
   PasswordEncoder encoder;
 
   @Autowired
+  private UserService userService;
+
+  @Autowired
   JwtUtils jwtUtils;
 
   @PostMapping("/signin")
@@ -63,6 +67,8 @@ public class AuthController {
     List<String> roles = userDetails.getAuthorities().stream()
         .map(item -> item.getAuthority())
         .collect(Collectors.toList());
+    userService.FatimMethode(userDetails.getId());
+
 
     return ResponseEntity.ok(new JwtResponse(jwt,
                          userDetails.getId(),
@@ -70,6 +76,7 @@ public class AuthController {
                          userDetails.getUsername(), 
                          userDetails.getEmail(), 
                          roles));
+
   }
 
   @PostMapping("/signup")

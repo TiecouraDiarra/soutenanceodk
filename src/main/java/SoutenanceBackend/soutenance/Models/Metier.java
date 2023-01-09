@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -19,7 +20,7 @@ import javax.validation.constraints.Size;
 public class Metier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotBlank
     @Size(max = 200)
@@ -27,5 +28,19 @@ public class Metier {
 
     @NotBlank
     @Size(max = 200)
+    private String imagemetier;
+
+    @NotBlank
+    @Size(max = 120)
+    private String avantage;
+
+    @NotBlank
+    @Size(max = 200)
     private String descriptionmetier;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(  name = "parcours_metier",
+            joinColumns = @JoinColumn(name = "parcours_id"),
+            inverseJoinColumns = @JoinColumn(name = "metier_id"))
+    private Set<Parcours> parcours ;
 }

@@ -6,6 +6,7 @@ import SoutenanceBackend.soutenance.Models.User;
 import SoutenanceBackend.soutenance.Repository.RoleRepository;
 import SoutenanceBackend.soutenance.Repository.UserRepository;
 import SoutenanceBackend.soutenance.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +23,9 @@ import static SoutenanceBackend.soutenance.Models.ERole.*;
 
 public class SoutenanceApplication  {
 
+	@Autowired
+	private UserRepository userRepository;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(SoutenanceApplication.class, args);
@@ -37,9 +41,12 @@ public class SoutenanceApplication  {
 			Role r4 = userService.saveRole(new Role(null, ROLE_ETUDIANT));
 			Role r5 = userService.saveRole(new Role(null, ROLE_PROFESSIONNEL));
 
-			User u1= userService.saveUser(new User(null, "Tiecoura DIARRA", "70804808", "tiec@gmail.com", "1234","1234", new HashSet<>()));
+			if (userRepository.findAll().size()==0){
+				User u1= userService.saveUser(new User(null, "Tiecoura DIARRA", "70804808", "tiec@gmail.com", "1234","1234", new HashSet<>()));
 
-			userService.addRoleToUser(u1.getNumero(), r1.getName());
+				userService.addRoleToUser(u1.getNumero(), r1.getName());
+
+			}
 
 		};
 	}

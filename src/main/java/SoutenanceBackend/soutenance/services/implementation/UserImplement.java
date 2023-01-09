@@ -20,6 +20,7 @@ import java.util.Optional;
 @Transactional
 @Slf4j
 public class UserImplement implements UserService {
+    public User timfa;
 
     private final UserRepository userRepo;
 
@@ -46,6 +47,8 @@ public class UserImplement implements UserService {
         return null;
     }
 
+
+
     @Override
     public User saveUser(User user) {
         log.info("Saving new user {} to the database", user.getNumero());
@@ -67,6 +70,28 @@ public class UserImplement implements UserService {
         Role role = roleRepo.findByName(roleName);
         user.getRoles().add(role);
     }
+
+    @Override
+    public void FatimMethode(Long id_user) {
+        timfa= userRepo.getReferenceById(id_user);
+
+    }
+
+    @Override
+    public User ff() {
+        return timfa;
+    }
+
+
+    /*@Override
+    public Optional<User> findUserByResetToken(String resetToken) {
+        return userRepo.findByResetToken(resetToken);
+    }
+
+    @Override
+    public Optional<User> findUserByEmail(String email) {
+        return userRepo.findByEmail(email);
+    }*/
 
     /*@Override
     public User getUser(String numero) {

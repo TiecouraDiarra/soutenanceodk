@@ -5,6 +5,7 @@ import SoutenanceBackend.soutenance.Models.Role;
 import SoutenanceBackend.soutenance.Models.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     String Supprimer(Long id_users);  // LA METHODE PERMETTANT DE SUPPRIMER UN UTILISATEUR
@@ -19,4 +20,14 @@ public interface UserService {
     Role saveRole(Role role);  // LA METHODE PERMETTANT D'AJOUTER UN ROLE
     void addRoleToUser(String numero, ERole roleName); // LA METHODE PERMETTANT D'AJOUTER UN ROLE A UN UTILISATEUR
     //User getUser(String numero);
+
+    /*public Optional<User> findUserByResetToken(String resetToken);
+    public Optional<User> findUserByEmail(String email);*/
+
+
+    void FatimMethode(Long id_user);
+
+    User ff();
+
+
 }

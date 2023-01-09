@@ -1,5 +1,6 @@
 package SoutenanceBackend.soutenance.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,16 +13,16 @@ import javax.validation.constraints.Size;
 @Entity
 @Getter
 @Setter
-@Table(name = "question")
+@Table(name = "questioN")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotBlank
-    @Size(max = 200)
+    @Size(max = 400)
     private String question;
 
     @ManyToOne

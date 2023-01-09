@@ -20,7 +20,7 @@ public class Autoevaluation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //@NotBlank
-    @Size(max = 200)
+    @NotBlank
+    @Size(max = 500)
     private String nomautoevaluation;
 }

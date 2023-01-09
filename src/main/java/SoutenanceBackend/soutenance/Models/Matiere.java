@@ -19,7 +19,7 @@ import java.util.Set;
 public class Matiere {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotBlank
     @Size(max = 200)
@@ -28,5 +28,11 @@ public class Matiere {
     @NotBlank
     @Size(max = 200)
     private String descriptionmatiere;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(  name = "parcours_matieres",
+            joinColumns = @JoinColumn(name = "parcours_id"),
+            inverseJoinColumns = @JoinColumn(name = "matieres_id"))
+    private Set<Parcours> parcours ;
 
 }

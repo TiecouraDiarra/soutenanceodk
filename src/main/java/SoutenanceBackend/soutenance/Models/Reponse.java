@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 public class Reponse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotBlank
     @Size(max = 200)

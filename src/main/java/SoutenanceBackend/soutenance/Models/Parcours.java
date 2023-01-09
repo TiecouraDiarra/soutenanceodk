@@ -21,7 +21,7 @@ import java.util.Set;
 public class Parcours {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotBlank
     @Size(max = 100)
@@ -48,15 +48,15 @@ public class Parcours {
     @Size(max = 120)
     private String filiere;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    /*@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(  name = "parcours_matieres",
             joinColumns = @JoinColumn(name = "parcours_id"),
             inverseJoinColumns = @JoinColumn(name = "matieres_id"))
-    private Set<Matiere> matiere ;
+    private Set<Matiere> matiere ;*/
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    /*@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(  name = "parcours_metier",
             joinColumns = @JoinColumn(name = "parcours_id"),
             inverseJoinColumns = @JoinColumn(name = "metier_id"))
-    private Set<Metier> metier ;
+    private Set<MetierRepository> metier ;*/
 }

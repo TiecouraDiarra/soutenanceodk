@@ -24,14 +24,14 @@ public class AutoevaluationImplement implements AutoevaluationService {
     }
 
     @Override
-    public String Modifier(Autoevaluation autoevaluation) {
-        Autoevaluation auto = autoevaluationRepository.findByNomautoevaluation(autoevaluation.getNomautoevaluation());
-        autoevaluationRepository.findById(autoevaluation.getId())
+    public Autoevaluation Modifier(Autoevaluation autoevaluation) {
+        //Autoevaluation auto = autoevaluationRepository.findByNomautoevaluation(autoevaluation.getNomautoevaluation());
+        return autoevaluationRepository.findById(autoevaluation.getId())
                 .map(p->{
                     p.setNomautoevaluation(autoevaluation.getNomautoevaluation());
                     return autoevaluationRepository.save(p);
                 }).orElseThrow(() -> new RuntimeException("Autoevaluation non trouvé !"));
-        return null;
+
     }
 
     @Override
