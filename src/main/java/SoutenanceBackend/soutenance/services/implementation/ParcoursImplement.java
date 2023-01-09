@@ -4,9 +4,10 @@ import SoutenanceBackend.soutenance.Models.Parcours;
 import SoutenanceBackend.soutenance.Repository.ParcoursRepository;
 import SoutenanceBackend.soutenance.services.ParcoursService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ParcoursImplement implements ParcoursService {
 
     @Autowired
