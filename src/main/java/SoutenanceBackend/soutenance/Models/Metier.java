@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -31,16 +32,17 @@ public class Metier {
     private String imagemetier;
 
     @NotBlank
-    @Size(max = 120)
+
     private String avantage;
 
     @NotBlank
-    @Size(max = 200)
+
     private String descriptionmetier;
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(  name = "parcours_metier",
-            joinColumns = @JoinColumn(name = "parcours_id"),
-            inverseJoinColumns = @JoinColumn(name = "metier_id"))
-    private Set<Parcours> parcours ;
+            joinColumns = @JoinColumn(name = "metier_id"),
+            inverseJoinColumns = @JoinColumn(name = "parcours_id"))
+    private Set<Parcours> parcours= new HashSet<>();
 }

@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -28,8 +27,11 @@ public class MatiereController {
 
         // LOG.info("Ajouter avec succès");
         Parcours parcours = parcoursRepository.getReferenceById(id_parcours);
-        matiere.setParcours((Set<Parcours>) parcours);
-        matiere.getParcours();
+
+        Set<Parcours> parcours1 = new HashSet<>();
+        parcours1.add(parcours);
+
+        matiere.setParcours(parcours1);
         matiereService.Ajouter(matiere);
         return "Matiere ajoutée avec succès";
     }

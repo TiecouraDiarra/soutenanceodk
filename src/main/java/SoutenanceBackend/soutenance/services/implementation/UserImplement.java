@@ -1,6 +1,7 @@
 package SoutenanceBackend.soutenance.services.implementation;
 
 import SoutenanceBackend.soutenance.Models.ERole;
+import SoutenanceBackend.soutenance.Models.EmailConstructor;
 import SoutenanceBackend.soutenance.Models.Role;
 import SoutenanceBackend.soutenance.Models.User;
 import SoutenanceBackend.soutenance.Repository.RoleRepository;
@@ -8,6 +9,10 @@ import SoutenanceBackend.soutenance.Repository.UserRepository;
 import SoutenanceBackend.soutenance.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +26,13 @@ import java.util.Optional;
 @Slf4j
 public class UserImplement implements UserService {
     public User timfa;
+
+    @Autowired
+    EmailConstructor emailConstructor;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    JavaMailSender mailSender;
 
     private final UserRepository userRepo;
 
@@ -72,6 +84,11 @@ public class UserImplement implements UserService {
     }
 
     @Override
+    public User RecupererIdUser(Long iduser) {
+        return userRepo.findById(iduser).get();
+    }
+
+    @Override
     public void FatimMethode(Long id_user) {
         timfa= userRepo.getReferenceById(id_user);
 
@@ -80,6 +97,15 @@ public class UserImplement implements UserService {
     @Override
     public User ff() {
         return timfa;
+    }
+
+    @Override
+    public void resetPassword(User user) {
+        String password = RandomStringUtils.randomAlphanumeric(10);
+        String encryptedPassword = bCryptPasswordEncoder.encode(password);
+        user.setPassword(encryptedPassword);
+        userRepo.save(user);
+        mailSender.send(emailConstructor.constructResetPasswordEmail(user, password));
     }
 
 

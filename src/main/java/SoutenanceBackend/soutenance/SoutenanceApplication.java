@@ -26,6 +26,9 @@ public class SoutenanceApplication  {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private RoleRepository roleRepository;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(SoutenanceApplication.class, args);
@@ -35,14 +38,15 @@ public class SoutenanceApplication  {
 	@Bean
 	CommandLineRunner run(UserService userService){
 		return args -> {
-			Role r1=userService.saveRole(new Role(null, ROLE_ADMIN));
-			Role r2 = userService.saveRole(new Role(null, ROLE_USER));
-			Role r3 = userService.saveRole(new Role(null, ROLE_ELEVE));
-			Role r4 = userService.saveRole(new Role(null, ROLE_ETUDIANT));
-			Role r5 = userService.saveRole(new Role(null, ROLE_PROFESSIONNEL));
 
-			if (userRepository.findAll().size()==0){
-				User u1= userService.saveUser(new User(null, "Tiecoura DIARRA", "70804808", "tiec@gmail.com", "1234","1234", new HashSet<>()));
+
+			if (userRepository.findAll().size()==0 && roleRepository.findAll().size()==0){
+				Role r1=userService.saveRole(new Role(null, ROLE_ADMIN));
+				Role r2 = userService.saveRole(new Role(null, ROLE_USER));
+				Role r3 = userService.saveRole(new Role(null, ROLE_ELEVE));
+				Role r4 = userService.saveRole(new Role(null, ROLE_ETUDIANT));
+				Role r5 = userService.saveRole(new Role(null, ROLE_PROFESSIONNEL));
+				User u1= userService.saveUser(new User(null,"Tiecoura DIARRA", "70804808", "tiec@gmail.com", "12345678","12345678", new HashSet<>()));
 
 				userService.addRoleToUser(u1.getNumero(), r1.getName());
 

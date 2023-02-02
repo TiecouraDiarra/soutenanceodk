@@ -4,10 +4,12 @@ import SoutenanceBackend.soutenance.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Repository
 public interface UserRepository extends JpaRepository<User,Long> {
     //Optional<User> findByNumero(String numero);
 
@@ -27,4 +29,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Transactional
     @Query(value = "INSERT INTO users (numero,email,password,confirmpassword) VALUES ('70804808','tiec@c.com', 'tiec1234', 'tiec1234');",nativeQuery = true)
     void creationadmin();
+
+    User findByEmail(String email);
 }

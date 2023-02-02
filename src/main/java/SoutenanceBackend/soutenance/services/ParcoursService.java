@@ -14,4 +14,6 @@ public interface ParcoursService {
     List<Parcours> Afficher();       // LA METHODE PERMETTANT D'AFFICHER LES PARCOURS
 
     Object Ajouter(Parcours parcours); // LA METHODE PERMETTANT D'AJOUTER UN PARCOURS
+
+    Parcours RecupererIdParcours(Long idparcours); // LA METHODE PERMETTANT DE RECUPERER L'ID D'UN PARCOURS
 }

@@ -9,6 +9,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,12 +23,32 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    private String question;
+
+    @ManyToOne
+    @JoinColumn(name = "id_typequestion")
+    private TypeQuestion typeQuestion;
+
+    @ManyToOne
+    @JoinColumn(name = "id_typeMatiere")
+    private TypeMatiere typeMatiere;
+
+/*
+    @OneToOne
+    @JoinColumn(name = "id_matierequestion")
+    private MatiereQuestion matiereQuestion;
+*/
+
+
+
+    /*@JsonIgnore
+    @ManyToMany(mappedBy = "questions")
+    List<Autoevaluation> autoevaluations = new ArrayList<>();*/
+    /*@NotBlank
     @Size(max = 400)
     private String question;
 
     @ManyToOne
-    //@JsonIgnore
     @JoinColumn(name = "id_autoevaluation")
-    private Autoevaluation autoevaluation;
+    private Autoevaluation autoevaluation;*/
 }

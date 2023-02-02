@@ -28,8 +28,9 @@ public class QuestionImplement implements QuestionService {
     public Question Modifier(Question question) {
         return questionRepository.findById(question.getId())
                 .map(p->{
+                    p.setTypeMatiere(question.getTypeMatiere());
+                    p.setTypeQuestion(question.getTypeQuestion());
                     p.setQuestion(question.getQuestion());
-                    p.setAutoevaluation(question.getAutoevaluation());
                     return questionRepository.save(p);
                 }).orElseThrow(() -> new RuntimeException("Question non trouvée !"));
     }

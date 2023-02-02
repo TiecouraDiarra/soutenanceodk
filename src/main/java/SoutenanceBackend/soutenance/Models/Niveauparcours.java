@@ -24,5 +24,4 @@ public class Niveauparcours {
     @Size(max = 200)
     private String nomniveau;
 
-
 }

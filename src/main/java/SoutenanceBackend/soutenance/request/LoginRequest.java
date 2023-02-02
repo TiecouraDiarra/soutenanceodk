@@ -3,10 +3,10 @@ package SoutenanceBackend.soutenance.request;
 import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {
-    @NotBlank
+
     private String numeroOrEmail;
 
-    @NotBlank
+
     private String password;
 
 

@@ -29,7 +29,6 @@ public class MetierImplement implements MetierService {
                     p.setDescriptionmetier(metier.getDescriptionmetier());
                     p.setAvantage(metier.getAvantage());
                     p.setImagemetier(metier.getImagemetier());
-                    p.setParcours(metier.getParcours());
                     return metierRepository.save(p);
                 }).orElseThrow(() -> new RuntimeException("Metier non trouvé !"));
     }
@@ -42,5 +41,10 @@ public class MetierImplement implements MetierService {
     @Override
     public Object Ajouter(Metier metier) {
         return metierRepository.save(metier);
+    }
+
+    @Override
+    public Metier RecupererIdMetier(Long idmetier) {
+        return metierRepository.findById(idmetier).get();
     }
 }

@@ -8,6 +8,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -30,9 +33,11 @@ public class Matiere {
     private String descriptionmatiere;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(  name = "parcours_matieres",
-            joinColumns = @JoinColumn(name = "parcours_id"),
-            inverseJoinColumns = @JoinColumn(name = "matieres_id"))
-    private Set<Parcours> parcours ;
+    @JoinTable(  name = "matieres_parcours",
+            joinColumns = @JoinColumn(name = "matieres_id"),
+            inverseJoinColumns = @JoinColumn(name = "parcours_id"))
+    private Set<Parcours> parcours = new HashSet<>();
+    //private Collection<Parcours> parcours = new ArrayList<>();
+    //private Parcours parcours;
 
 }

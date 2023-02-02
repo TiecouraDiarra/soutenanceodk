@@ -1,6 +1,7 @@
 package SoutenanceBackend.soutenance.services;
 
 import SoutenanceBackend.soutenance.Models.ERole;
+import SoutenanceBackend.soutenance.Models.Parcours;
 import SoutenanceBackend.soutenance.Models.Role;
 import SoutenanceBackend.soutenance.Models.User;
 
@@ -24,10 +25,13 @@ public interface UserService {
     /*public Optional<User> findUserByResetToken(String resetToken);
     public Optional<User> findUserByEmail(String email);*/
 
+    User RecupererIdUser(Long iduser); // LA METHODE PERMETTANT DE RECUPERER L'ID D'UN UTILISATEUR
+
 
     void FatimMethode(Long id_user);
 
     User ff();
 
 
+    void resetPassword(User user);
 }

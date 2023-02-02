@@ -26,9 +26,10 @@ public class ParcoursImplement implements ParcoursService {
                 .map(p->{
                     p.setNomparcours(parcours.getNomparcours());
                     p.setDescription(parcours.getDescription());
-                    p.setAvantage(parcours.getAvantage());
+                    p.setDuree(parcours.getDuree());
                     p.setFiliere(parcours.getFiliere());
-                    p.setDomaine(parcours.getDomaine());
+                    p.setTitre(parcours.getTitre());
+                    p.setAdmission(parcours.getTitre());
                     p.setImageparcours(parcours.getImageparcours());
                     return parcoursRepository.save(p);
                 }).orElseThrow(() -> new RuntimeException("Parcours non trouvé !"));
@@ -42,5 +43,10 @@ public class ParcoursImplement implements ParcoursService {
     @Override
     public Object Ajouter(Parcours parcours) {
         return parcoursRepository.save(parcours);
+    }
+
+    @Override
+    public Parcours RecupererIdParcours(Long idparcours) {
+        return parcoursRepository.findById(idparcours).get();
     }
 }

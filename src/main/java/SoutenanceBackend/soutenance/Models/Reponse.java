@@ -1,5 +1,6 @@
 package SoutenanceBackend.soutenance.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,17 +22,20 @@ public class Reponse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     @Size(max = 200)
     private String reponse;
 
     @ManyToOne
-    //@JsonIgnore
     @JoinColumn(name = "id_question")
     private Question question;
 
-    @ManyToOne
-    //@JsonIgnore
-    @JoinColumn(name = "id_utilisateur")
-    private User utilisateur;
+
+
+    /*@ManyToOne
+    @JoinColumn(name = "id_stringreponse")
+    private StringReponse stringReponse;
+
+    @OneToOne
+    @JoinColumn(name = "id_intreponse")
+    private IntReponse intReponse;*/
 }

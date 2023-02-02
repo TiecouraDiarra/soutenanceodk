@@ -1,17 +1,17 @@
 package SoutenanceBackend.soutenance.controllers;
 
-import SoutenanceBackend.soutenance.Models.Autoevaluation;
-import SoutenanceBackend.soutenance.Models.Question;
-import SoutenanceBackend.soutenance.Repository.AutoevaluationRepository;
+import SoutenanceBackend.soutenance.Models.*;
+import SoutenanceBackend.soutenance.Repository.*;
 import SoutenanceBackend.soutenance.services.AutoevaluationService;
 import SoutenanceBackend.soutenance.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins ="http://localhost:8100", maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("question")
 public class QuestionController {
@@ -20,21 +20,39 @@ public class QuestionController {
     private QuestionService questionService;
 
     @Autowired
+    private QuestionRepository questionRepository;
+
+    @Autowired
     private AutoevaluationRepository autoevaluationRepository;
 
+    @Autowired
+    private TypeMatiereRepository typeMatiereRepository;
+
+    @Autowired
+    private TypeQuestionRepository typeQuestionRepository;
+
+    @Autowired
+    private MatiereQuestionRepository matiereQuestionRepository;
+
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/ajouter/{id_auto}")
-    public Object Ajouter(@RequestBody Question question, @PathVariable("id_auto") Long id_auto){
+    @PostMapping("/ajouter/{id_type}/{id_typemat}")
+    public Object Ajouter(@PathVariable("id_type") Long id_type, @PathVariable("id_typemat") Long id_typemat, @Param("question1") String question1){
 
         // LOG.info("Ajouter avec succès");
-        Autoevaluation autoevaluation = autoevaluationRepository.getReferenceById(id_auto);
+        /*Autoevaluation autoevaluation = autoevaluationRepository.getReferenceById(id_auto);
         question.setAutoevaluation(autoevaluation);
-        question.getAutoevaluation();
+        question.getAutoevaluation();*/
+        Question question = new Question();
+        question.setQuestion(question1);
+        TypeQuestion typeQuestion = typeQuestionRepository.getReferenceById(id_type);
+        question.setTypeQuestion(typeQuestion);
+        TypeMatiere typeMatiere = typeMatiereRepository.getReferenceById(id_typemat);
+        question.setTypeMatiere(typeMatiere);
         questionService.Ajouter(question);
         return "Question ajoutée avec succès";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/afficher")
     public List<Question> Afficher(){
         return questionService.Afficher();
@@ -53,5 +71,53 @@ public class QuestionController {
 
         //LOG.info("Suppression reussie");
         return questionService.Supprimer(id_question);
+    }
+
+    //LES QUESTIONS POUR LES ELEVES
+    @GetMapping("/afficherQuestionEleve")
+    public List<Question> AfficherQuestionEleve(){
+        return questionRepository.Questioneleve();
+    }
+
+    //LES QUESTIONS POUR LES PROFESSIONNELS
+    @GetMapping("/afficherQuestionProfe")
+    public List<Question> AfficherQuestionProfe(){
+        return questionRepository.Questionprofessionnel();
+    }
+
+    //LA METHODE PERMETTANT D'AFFICHER LES QUESTIONS DES ETUDIANTS QUI ONT FAIT LA TSECO
+    @GetMapping("/afficherQuestionTseco")
+    public List<Question> AfficherQuestionTseco(){
+        return questionRepository.QuestionTSECO();
+    }
+
+    //LA METHODE PERMETTANT D'AFFICHER LES QUESTIONS DES ETUDIANTS QUI ONT FAIT LA TSE
+    @GetMapping("/afficherQuestionTse")
+    public List<Question> AfficherQuestionTse(){
+        return questionRepository.QuestionTSE();
+    }
+
+    //LA METHODE PERMETTANT D'AFFICHER LES QUESTIONS DES ETUDIANTS QUI ONT FAIT LA TSEXP
+    @GetMapping("/afficherQuestionTsexp")
+    public List<Question> AfficherQuestionTsexp(){
+        return questionRepository.QuestionTSEXP();
+    }
+
+    //LA METHODE PERMETTANT D'AFFICHER LES QUESTIONS DES ETUDIANTS QUI ONT FAIT LA TLL
+    @GetMapping("/afficherQuestionTll")
+    public List<Question> AfficherQuestionTll(){
+        return questionRepository.QuestionTLL();
+    }
+
+    //LA METHODE PERMETTANT D'AFFICHER LES QUESTIONS DES ETUDIANTS QUI ONT FAIT LA TAL
+    @GetMapping("/afficherQuestionTal")
+    public List<Question> AfficherQuestionTal(){
+        return questionRepository.QuestionTAL();
+    }
+
+    //LA METHODE PERMETTANT D'AFFICHER LES QUESTIONS DES ETUDIANTS QUI ONT FAIT LA TSS
+    @GetMapping("/afficherQuestionTss")
+    public List<Question> AfficherQuestionTss(){
+        return questionRepository.QuestionTSS();
     }
 }

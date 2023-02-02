@@ -25,7 +25,6 @@ public class MatiereImplement implements MatiereService {
                 .map(p->{
                     p.setNommatiere(matiere.getNommatiere());
                     p.setDescriptionmatiere(matiere.getDescriptionmatiere());
-                    p.setParcours(matiere.getParcours());
                     return matiereRepository.save(p);
                 }).orElseThrow(() -> new RuntimeException("Matière non trouvée !"));
     }

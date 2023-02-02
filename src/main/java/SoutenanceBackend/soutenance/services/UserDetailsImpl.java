@@ -1,5 +1,7 @@
 package SoutenanceBackend.soutenance.services;
 
+import SoutenanceBackend.soutenance.Models.Etudiant;
+import SoutenanceBackend.soutenance.Models.SerieLycee;
 import SoutenanceBackend.soutenance.Models.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +22,25 @@ public class UserDetailsImpl implements UserDetails {
 
     private String numero;
 
+
+ /*   public SerieLycee getNomserie() {
+        return nomserie;
+    }
+
+    public void setNomserie(SerieLycee nomserie) {
+        this.nomserie = nomserie;
+    }*/
+
+    public SerieLycee getSerie() {
+        return Serie;
+    }
+
+    public void setSerie(SerieLycee serie) {
+        Serie = serie;
+    }
+
+    private SerieLycee Serie;
+
     private String email;
 
     @JsonIgnore
@@ -27,17 +48,19 @@ public class UserDetailsImpl implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String nomcomplet, String numero, String email, String password,
+    public UserDetailsImpl(Long id, String nomcomplet, String numero, String email, String password,SerieLycee nomserie,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.nomcomplet = nomcomplet;
         this.numero = numero;
         this.email = email;
         this.password = password;
+        this.Serie = nomserie;
         this.authorities = authorities;
     }
 
     public static UserDetailsImpl build(User user) {
+        Etudiant etudiant = new Etudiant();
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
@@ -48,6 +71,7 @@ public class UserDetailsImpl implements UserDetails {
                 user.getNumero(),
                 user.getEmail(),
                 user.getPassword(),
+                etudiant.getSerieLycee(),
                 authorities);
     }
 

@@ -1,6 +1,7 @@
 package SoutenanceBackend.soutenance.Models;
 
 import lombok.AllArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -12,6 +13,8 @@ import java.util.Set;
 
 @Entity
 @AllArgsConstructor
+@SuperBuilder
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "users",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "numero"),
@@ -20,32 +23,30 @@ import java.util.Set;
         public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
-    @NotBlank
+
     @Size(max = 120)
     private String nomcomplet;
 
-    @NotBlank
     @Size(max = 20)
     private String numero;
 
-    @NotBlank
     @Size(max = 50)
     @Email(message = "S'il vous plaît veuillez entrer un email valide")
     private String email;
 
-    @NotBlank
     @Size(max = 120)
     private String password;
 
-    @NotBlank
     @Size(max = 120)
     private String confirmpassword;
 
     /*@Column(name = "reset_token")
     private String resetToken;*/
+
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(  name = "user_roles",
@@ -67,13 +68,6 @@ import java.util.Set;
 
 
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNumero() {
         return numero;
@@ -87,7 +81,7 @@ import java.util.Set;
         return nomcomplet;
     }
 
-    public void setNomcomplet(String numero) {
+    public void setNomcomplet(String nomcomplet) {
         this.nomcomplet = nomcomplet;
     }
 
@@ -130,6 +124,15 @@ import java.util.Set;
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }
 
 
