@@ -12,6 +12,7 @@ import SoutenanceBackend.soutenance.services.DomaineProfService;
 import SoutenanceBackend.soutenance.services.SerieLyceeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,13 @@ public class ProfessionnelController {
 
     @Autowired
     ProfessionnelRepository professionnelRepository;
+
+    @Autowired
+    private EmailConstructor emailConstructor;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
 
     @Autowired
     UserRepository userRepository;
@@ -104,6 +112,7 @@ public class ProfessionnelController {
             professionnel.setDomaineProf(domaineProf);
             professionnel.setRoles(roles);
             professionnelRepository.save(professionnel);
+            mailSender.send(emailConstructor.constructNewUserEmail(professionnel));
 
             return ResponseEntity.ok(new MessageResponse(professionnel.getNomcomplet() + " ajouté avec succès !"));
         }else {

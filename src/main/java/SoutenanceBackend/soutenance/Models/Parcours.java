@@ -40,6 +40,9 @@ public class Parcours {
     private String conseil;
 
     @NotBlank
+    private String type;
+
+    @NotBlank
     private String admission;
 
     @NotBlank

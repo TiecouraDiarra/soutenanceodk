@@ -40,6 +40,7 @@ public class ParcoursController {
                           @Param("titre") String titre,
                           @Param("conseil") String conseil,
                           @Param("duree") String duree,
+                          @Param("type") String type,
                           @Param("admission") String admission, @Param("filiere") String filiere,
                           @Param("imageparcours") MultipartFile imageparcours, @PathVariable("id_niveauparcours") Long id_niveauparcours) throws IOException {
 
@@ -48,6 +49,7 @@ public class ParcoursController {
         parcours.setDescription(description);
         parcours.setTitre(titre);
         parcours.setConseil(conseil);
+        parcours.setType(type);
         parcours.setDuree(duree);
         parcours.setAdmission(admission);
         parcours.setFiliere(filiere);
@@ -80,6 +82,21 @@ public class ParcoursController {
         return parcoursService.Afficher();
     }
 
+
+    //AFFICHER IMAGE UNIVERSITE
+    //@PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/afficherImageUniversite")
+    public List<Parcours> afficherImageUniversite(){
+        return parcoursRepository.ImagesParcoursUniversite();
+    }
+
+    //AFFICHER IMAGE FORMATION
+    //@PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/afficherImageFormation")
+    public List<Parcours> afficherImageFormations(){
+        return parcoursRepository.ImagesFormations();
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping({"/modifier/{id_niveauparcours}"})
     public String Modifier(@RequestBody Parcours parcours, @PathVariable("id_niveauparcours") Long id_niveauparcours){
@@ -102,10 +119,16 @@ public class ParcoursController {
         return parcoursRepository.ParcoursLycee();
     }
 
-    //LES PARCOURS DU PROFESSIONNEL
+    //LES PARCOURS DU PROFESSIONNEL(ELEVE)
     @GetMapping("/afficherParcoursProfessionnel")
     public List<Parcours> AfficherParcoursProfessionnel(){
         return parcoursRepository.ParcoursProfessionnel();
+    }
+
+    //LES FORMATIONS DU PROFESSIONNEL
+    @GetMapping("/afficherFormationsProfessionnel")
+    public List<Parcours> AfficherFormationsProfessionnel(){
+        return parcoursRepository.FormationsProfessionnelles();
     }
 
     //LES PARCOURS DE L'UNIVERSITE

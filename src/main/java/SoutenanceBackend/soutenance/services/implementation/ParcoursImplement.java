@@ -29,6 +29,7 @@ public class ParcoursImplement implements ParcoursService {
                     p.setDuree(parcours.getDuree());
                     p.setFiliere(parcours.getFiliere());
                     p.setTitre(parcours.getTitre());
+                    p.setType(parcours.getType());
                     p.setAdmission(parcours.getTitre());
                     p.setImageparcours(parcours.getImageparcours());
                     return parcoursRepository.save(p);

@@ -1,9 +1,6 @@
 package SoutenanceBackend.soutenance.controllers;
 
-import SoutenanceBackend.soutenance.Models.ERole;
-import SoutenanceBackend.soutenance.Models.Eleve;
-import SoutenanceBackend.soutenance.Models.Role;
-import SoutenanceBackend.soutenance.Models.User;
+import SoutenanceBackend.soutenance.Models.*;
 import SoutenanceBackend.soutenance.Repository.*;
 import SoutenanceBackend.soutenance.Security.jwt.JwtUtils;
 import SoutenanceBackend.soutenance.request.SignupEleve;
@@ -12,6 +9,7 @@ import SoutenanceBackend.soutenance.response.MessageResponse;
 import SoutenanceBackend.soutenance.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +29,13 @@ public class EleveController {
     EleveRepository eleveRepository;
 
     @Autowired
+    private JavaMailSender mailSender;
+
+    @Autowired
     EtudiantRepository etudiantRepository;
+
+    @Autowired
+    private EmailConstructor emailConstructor;
 
     @Autowired
     ProfessionnelRepository professionnelRepository;
@@ -118,6 +122,7 @@ public class EleveController {
             //user.setRoles(roles);
             //userRepository.save(user);
             eleveRepository.save(eleve);
+            mailSender.send(emailConstructor.constructNewUserEmail(eleve));
 
             return ResponseEntity.ok(new MessageResponse(eleve.getNomcomplet() + " ajouté avec succès !"));
         }else {

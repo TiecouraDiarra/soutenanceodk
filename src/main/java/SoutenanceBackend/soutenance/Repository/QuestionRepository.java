@@ -17,11 +17,17 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     @Query(value = "SELECT * FROM `question` WHERE question.id_typequestion=1;",nativeQuery = true)
     List<Question> Questioneleve();
 
-    //LA REQUETTE PERMETTANT D'AFFICHER LES QUESTIONS DES PROFESSIONNELS
+    //LA REQUETTE PERMETTANT D'AFFICHER LES QUESTIONS DES PROFESSIONNELS(DOMAINES)
     @Modifying
     @Transactional
-    @Query(value = "SELECT * FROM `question` WHERE question.id_typequestion=2;",nativeQuery = true)
+    @Query(value = "SELECT * FROM `question` WHERE question.id_typequestion=2 AND question.id_type_matiere=19;",nativeQuery = true)
     List<Question> Questionprofessionnel();
+
+    //LA REQUETTE PERMETTANT D'AFFICHER LES QUESTIONS DES PROFESSIONNELS(FILIERES)
+    @Modifying
+    @Transactional
+    @Query(value = "SELECT * FROM `question` WHERE question.id_typequestion=2 AND question.id_type_matiere=18;",nativeQuery = true)
+    List<Question> QuestionprofessionnelFiliere();
 
     //LA REQUETTE PERMETTANT D'AFFICHER LES QUESTIONS DES ETUDIANTS QUI ONT FAIT LA TSECO
     @Modifying

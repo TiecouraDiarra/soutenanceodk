@@ -79,10 +79,16 @@ public class QuestionController {
         return questionRepository.Questioneleve();
     }
 
-    //LES QUESTIONS POUR LES PROFESSIONNELS
+    //LES QUESTIONS POUR LES PROFESSIONNELS(DOMAINE)
     @GetMapping("/afficherQuestionProfe")
     public List<Question> AfficherQuestionProfe(){
         return questionRepository.Questionprofessionnel();
+    }
+
+    //LES QUESTIONS POUR LES PROFESSIONNELS(FILIERE)
+    @GetMapping("/afficherQuestionProfeFiliere")
+    public List<Question> AfficherQuestionProfeFiliere(){
+        return questionRepository.QuestionprofessionnelFiliere();
     }
 
     //LA METHODE PERMETTANT D'AFFICHER LES QUESTIONS DES ETUDIANTS QUI ONT FAIT LA TSECO
