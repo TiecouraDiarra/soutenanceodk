@@ -193,4 +193,9 @@ public interface ParcoursRepository extends JpaRepository<Parcours, Long> {
     @Transactional
     @Query(value = "SELECT * FROM `parcours` WHERE parcours.id_niveauparcours=4;",nativeQuery = true)
     List<Parcours> ImagesFormations();
+
+    List<Parcours> findByType(String nomtype);
+
+    @Query(value = "SELECT COUNT(id) FROM `parcours`;", nativeQuery = true)
+    Long nombreParcoursTotal();
 }

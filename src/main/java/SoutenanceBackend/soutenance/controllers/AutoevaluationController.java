@@ -28,6 +28,9 @@ public class AutoevaluationController {
     @Autowired
     private EtudiantRepository etudiantRepository;
 
+    @Autowired
+    private ProfessionnelRepository professionnelRepository;
+
 
     @Autowired
     private IntReponseRepository intReponseRepository;
@@ -628,7 +631,7 @@ public class AutoevaluationController {
         }
     }
 
-    //PARCOURS RECENTS DU PARCOURS D'UN ETUDIANT
+    //PARCOURS RECENTS D'UN PROFESSIONNEL
     @GetMapping("AutorecenteProfessionnel/{iduser}")
     public List<Parcours> Autorecenteprofessionnel(@PathVariable("iduser") Long iduser){
 
@@ -684,6 +687,17 @@ public class AutoevaluationController {
         else {
             return null;
         }
+    }
+
+    //AFFICHER FORMATION PAR DOMAINE
+    @GetMapping("/AfficherFormationParDomaine/{nomtype}")
+    public Object AfficherFormationParDomaine(@PathVariable String nomtype) {
+
+        //professionnel professionnel = professionnelRepository.findById(Id).get();
+
+        List<Parcours> ppp = parcoursRepository.findByType(nomtype);
+        return ppp;
+
     }
 //==============================FIN PROFESSIONNEL=====================================================
 }

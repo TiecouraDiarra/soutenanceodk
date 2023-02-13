@@ -3,6 +3,7 @@ package SoutenanceBackend.soutenance.controllers;
 import SoutenanceBackend.soutenance.Models.Matiere;
 import SoutenanceBackend.soutenance.Models.Metier;
 import SoutenanceBackend.soutenance.Models.Parcours;
+import SoutenanceBackend.soutenance.Repository.MetierRepository;
 import SoutenanceBackend.soutenance.Repository.ParcoursRepository;
 import SoutenanceBackend.soutenance.image.ConfigImage;
 import SoutenanceBackend.soutenance.services.MetierService;
@@ -18,7 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@CrossOrigin(origins ="http://localhost:8100", maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins ={"http://localhost:4200", "http://localhost:8100"}, maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("metiers")
 public class MetierController {
@@ -27,6 +28,9 @@ public class MetierController {
 
     @Autowired
     private MetierService metierService;
+
+    @Autowired
+    private MetierRepository metierRepository;
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/ajouter/{id_parcours}")
@@ -82,4 +86,9 @@ public class MetierController {
         return metierService.RecupererIdMetier(IdMetier);
     }
 
+    //AFFICHER LE NOMBRE TOTAL DES METIERS
+    @GetMapping("/NombreMetierTotal")
+    public Long getNombreTotalMetier(){
+        return metierRepository.nombreMetierTotal();
+    }
 }
