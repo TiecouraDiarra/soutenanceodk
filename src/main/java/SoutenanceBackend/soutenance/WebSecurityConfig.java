@@ -101,6 +101,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                 .antMatchers("/typequestion/**").permitAll()
                 .antMatchers("/typematiere/**").permitAll()
                 .antMatchers("/serieetudiant/**").permitAll()
+                .antMatchers("/domaineprof/**").permitAll()
 
 
 
