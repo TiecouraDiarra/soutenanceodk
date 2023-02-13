@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -31,4 +32,12 @@ public interface UserRepository extends JpaRepository<User,Long> {
     void creationadmin();
 
     User findByEmail(String email);
+
+    @Query(value = "SELECT COUNT(id) FROM `users`;", nativeQuery = true)
+    Long nombreUserTotal();
+
+    @Query(value = "SELECT * FROM `user_roles`, `users` \n" +
+            "WHERE user_roles.user_id=users.id\n" +
+            "AND user_roles.role_id=2;", nativeQuery = true)
+    List<User> AfficherAdmin();
 }

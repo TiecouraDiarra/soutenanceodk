@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8100"}, maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("niveauparcours")
 public class NiveauParcoursController {
@@ -19,7 +19,7 @@ public class NiveauParcoursController {
     private NiveauParcoursService niveauParcoursService;
 
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN') or hasRole('ADMIN')" )
     @PostMapping("/ajouter")
     public Object Ajouter(@RequestBody Niveauparcours niveauparcours){
 
@@ -27,13 +27,13 @@ public class NiveauParcoursController {
         return niveauParcoursService.Ajouter(niveauparcours);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/afficher")
     public List<Niveauparcours> Afficher(){
         return niveauParcoursService.Afficher();
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PutMapping({"/modifier"})
     public String Modifier(@RequestBody Niveauparcours niveauparcours){
 
@@ -43,7 +43,7 @@ public class NiveauParcoursController {
     }
 
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/supprimer/{id_niveauparcours}")
     public String Supprimer(@PathVariable("id_niveauparcours") Long id_niveauparcours){
 

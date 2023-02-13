@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 //@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:8100", maxAge = 3600, allowCredentials="true")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8100"}, maxAge = 3600, allowCredentials="true")
 public class AuthController {
   @Autowired
   AuthenticationManager authenticationManager;
@@ -108,7 +108,7 @@ public class AuthController {
       Set<Role> roles = new HashSet<>();
 
       if (strRoles == null) {
-        Role userRole = roleRepository.findByName(ERole.ROLE_USER);
+        Role userRole = roleRepository.findByName(ERole.ROLE_ADMIN);
         if(userRole==null){
           return ResponseEntity
                   .badRequest()
@@ -159,7 +159,7 @@ public class AuthController {
               break;
 
             default:
-              Role userRole = roleRepository.findByName(ERole.ROLE_USER);
+              Role userRole = roleRepository.findByName(ERole.ROLE_ADMIN);
               if(userRole==null){
                 new RuntimeException("Erreur: Role non trouvé.");
               }else {

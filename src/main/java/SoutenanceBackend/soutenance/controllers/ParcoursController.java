@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@CrossOrigin(origins ="http://localhost:8100", maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins ={"http://localhost:4200", "http://localhost:8100"}, maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("parcours")
 public class ParcoursController {
@@ -76,7 +76,7 @@ public class ParcoursController {
     }
 
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/afficher")
     public List<Parcours> Afficher(){
         return parcoursService.Afficher();
@@ -160,4 +160,20 @@ public class ParcoursController {
     public List<Metier> AfficherMetierParcours(@PathVariable Long IdParcours){
         return parcoursRepository.getReferenceById(IdParcours);
     }*/
+
+    //AFFICHER FORMATION PAR DOMAINE
+    @GetMapping("/AfficherFormationParDomaine/{nomtype}")
+    public Object AfficherFormationParDomaine(@PathVariable String nomtype) {
+
+        //professionnel professionnel = professionnelRepository.findById(Id).get();
+
+        List<Parcours> ppp = parcoursRepository.findByType(nomtype);
+        return ppp;
+
+    }
+
+    @GetMapping("/NombreParcoursTotal")
+    public Long getNombreTotalParcours(){
+        return parcoursRepository.nombreParcoursTotal();
+    }
 }

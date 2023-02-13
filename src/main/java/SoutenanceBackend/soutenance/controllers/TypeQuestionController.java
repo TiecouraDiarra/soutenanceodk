@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8100"}, maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("typequestion")
 public class TypeQuestionController {
@@ -20,7 +20,7 @@ public class TypeQuestionController {
 
 
     //AJOUTER UN TYPE
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/ajouter")
     public Object Ajouter(@RequestBody TypeQuestion typeQuestion){
 
@@ -29,14 +29,14 @@ public class TypeQuestionController {
     }
 
     //AFFICHER LES TYPES
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/afficher")
     public List<TypeQuestion> Afficher(){
         return typeQuestionService.Afficher();
     }
 
     //MODIFIER UN TYPE
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PutMapping({"/modifier"})
     public String Modifier(@RequestBody TypeQuestion typeQuestion){
 
@@ -47,7 +47,7 @@ public class TypeQuestionController {
 
 
     //SUPPRIMER UN TYPE
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/supprimer/{id_typequestion}")
     public String Supprimer(@PathVariable("id_typequestion") Long id_typequestion){
 

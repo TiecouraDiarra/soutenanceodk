@@ -14,4 +14,7 @@ public interface MetierRepository extends JpaRepository<Metier, Long> {
     @Transactional
     @Query(value = "SELECT * FROM `metier`;",nativeQuery = true)
     List<Metier> AfficherTousLesMetiers();
+
+    @Query(value = "SELECT COUNT(id) FROM `metier`;", nativeQuery = true)
+    Long nombreMetierTotal();
 }

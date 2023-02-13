@@ -41,8 +41,8 @@ public class SoutenanceApplication  {
 
 
 			if (userRepository.findAll().size()==0 && roleRepository.findAll().size()==0){
-				Role r1=userService.saveRole(new Role(null, ROLE_ADMIN));
-				Role r2 = userService.saveRole(new Role(null, ROLE_USER));
+				Role r1=userService.saveRole(new Role(null, ROLE_SUPERADMIN));
+				Role r2 = userService.saveRole(new Role(null, ROLE_ADMIN));
 				Role r3 = userService.saveRole(new Role(null, ROLE_ELEVE));
 				Role r4 = userService.saveRole(new Role(null, ROLE_ETUDIANT));
 				Role r5 = userService.saveRole(new Role(null, ROLE_PROFESSIONNEL));
