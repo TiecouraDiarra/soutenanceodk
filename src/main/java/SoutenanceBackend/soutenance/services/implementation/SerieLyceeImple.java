@@ -15,4 +15,9 @@ public class SerieLyceeImple implements SerieLyceeService {
     public SerieLycee trouverSerieParNom(String nomserie) {
         return serieLyceeRepository.findByNomserie(nomserie);
     }
+
+    @Override
+    public Object Ajouter(SerieLycee serieLycee) {
+        return serieLyceeRepository.save(serieLycee);
+    }
 }

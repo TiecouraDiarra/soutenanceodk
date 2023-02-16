@@ -22,8 +22,7 @@ public class AutoevaluationImplement implements AutoevaluationService {
 
     @Autowired
     private ReponseRepository reponseRepository;
-    @Autowired
-    private MatiereQuestionRepository matiereQuestionRepository;
+
     @Autowired
     private TypeQuestionRepository typeQuestionRepository;
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins ="http://localhost:8100", maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins ={"http://localhost:4200", "http://localhost:8100"}, maxAge = 3600, allowCredentials = "true")
 @RestController
 @RequestMapping("question")
 public class QuestionController {
@@ -31,10 +31,8 @@ public class QuestionController {
     @Autowired
     private TypeQuestionRepository typeQuestionRepository;
 
-    @Autowired
-    private MatiereQuestionRepository matiereQuestionRepository;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/ajouter/{id_type}/{id_typemat}")
     public Object Ajouter(@PathVariable("id_type") Long id_type, @PathVariable("id_typemat") Long id_typemat, @Param("question1") String question1){
 
@@ -58,14 +56,19 @@ public class QuestionController {
         return questionService.Afficher();
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PutMapping({"/modifier/{id_auto}"})
     public String Modifier(@RequestBody Question question, @PathVariable("id_auto") Long id_auto){
         questionService.Modifier(question);
         return "Modification reussie avec succès";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/modifierquestion/{id_question}")
+    public Question update(@PathVariable Long id_question, @RequestBody Question question){
+        return questionService.modifier(id_question, question);
+    }
+
+    //@PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/supprimer/{id_question}")
     public String Supprimer(@PathVariable("id_question") Long id_question){
 

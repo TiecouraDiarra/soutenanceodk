@@ -9,6 +9,7 @@ public interface QuestionService {
     String Supprimer(Long id_question);  // LA METHODE PERMETTANT DE SUPPRIMER UNE QUESTION
 
     Question Modifier(Question question);   // LA METHODE PERMETTANT DE MODIFIER UNE QUESTION
+    Question modifier(Long id_question, Question question);
 
     List<Question> Afficher();       // LA METHODE PERMETTANT D'AFFICHER LES QUESTION
 

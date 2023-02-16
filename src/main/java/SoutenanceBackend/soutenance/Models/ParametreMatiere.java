@@ -10,10 +10,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Entity
+//@Entity
 @Getter
 @Setter
-@Table(name = "parammatiere")
+//@Table(name = "parammatiere")
 @NoArgsConstructor
 @AllArgsConstructor
 public class ParametreMatiere {

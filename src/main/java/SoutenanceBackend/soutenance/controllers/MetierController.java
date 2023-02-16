@@ -32,7 +32,7 @@ public class MetierController {
     @Autowired
     private MetierRepository metierRepository;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/ajouter/{id_parcours}")
     public Object Ajouter(@Param("nommetier") String nommetier, @Param("descriptionmetier") String descriptionmetier,
                           @Param("avantage") String avantage,
@@ -72,7 +72,7 @@ public class MetierController {
         return "Modification reussie avec succès";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/supprimer/{id_metier}")
     public String Supprimer(@PathVariable("id_metier") Long id_metier){
 

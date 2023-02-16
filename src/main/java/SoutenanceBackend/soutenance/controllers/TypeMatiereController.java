@@ -24,7 +24,7 @@ public class TypeMatiereController {
 
 
     //AJOUTER UN TYPE
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/ajouter")
     public Object Ajouter(@RequestBody TypeMatiere typeMatiere){
 
@@ -37,5 +37,14 @@ public class TypeMatiereController {
     @GetMapping("/afficher")
     public List<TypeMatiere> Afficher(){
         return typeMatiereRepository.findAll();
+    }
+
+    //SUPPRIMER UN TYPE
+    //@PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/supprimer/{id_typematiere}")
+    public String Supprimer(@PathVariable("id_typematiere") Long id_typematiere){
+
+        //LOG.info("Suppression reussie");
+        return typeMatiereService.Supprimer(id_typematiere);
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins ="http://localhost:8100", maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8100"}, maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("autoevaluation")
 public class AutoevaluationController {
@@ -32,8 +32,6 @@ public class AutoevaluationController {
     private ProfessionnelRepository professionnelRepository;
 
 
-    @Autowired
-    private IntReponseRepository intReponseRepository;
 
     @Autowired
     private AutoevaluationRepository autoevaluationRepository;
@@ -82,7 +80,7 @@ public class AutoevaluationController {
         return autoevaluationService.ARET(reponse,idutil,idmatier,idtypequestion);
     }*/
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/afficher")
     public List<Autoevaluation> Afficher(){
         return autoevaluationService.Afficher();
@@ -93,14 +91,14 @@ public class AutoevaluationController {
     public Optional<Autoevaluation> autoevaluation(@PathVariable("id_auto") Long id_auto){
         return autoevaluationRepository.findById(id_auto);
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PutMapping({"/modifier"})
     public String ModierUser(@RequestBody Autoevaluation autoevaluation){
         autoevaluationService.Modifier(autoevaluation);
         return "Modification reussie avec succès";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/supprimer/{id_autoevaluation}")
     public String Supprimer(@PathVariable("id_autoevaluation") Long id_autoevaluation){
 

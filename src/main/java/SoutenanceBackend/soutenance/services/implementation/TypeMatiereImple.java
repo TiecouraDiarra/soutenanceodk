@@ -15,7 +15,8 @@ public class TypeMatiereImple implements TypeMatiereService {
     private TypeMatiereRepository typeMatiereRepository;
     @Override
     public String Supprimer(Long id_typematiere) {
-        return null;
+        typeMatiereRepository.deleteById(id_typematiere);
+        return "Supprimer avec succès";
     }
 
     @Override

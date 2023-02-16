@@ -36,6 +36,17 @@ public class QuestionImplement implements QuestionService {
     }
 
     @Override
+    public Question modifier(Long id_question, Question question) {
+        return questionRepository.findById(id_question)
+                .map(p->{
+                    p.setQuestion(question.getQuestion());
+                    p.setTypeQuestion(question.getTypeQuestion());
+                    p.setTypeMatiere(question.getTypeMatiere());
+                    return questionRepository.save(p);
+                }).orElseThrow(() -> new RuntimeException("Question non trouvée !"));
+    }
+
+    @Override
     public List<Question> Afficher() {
         return questionRepository.findAll();
     }

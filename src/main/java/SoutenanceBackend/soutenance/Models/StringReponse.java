@@ -9,10 +9,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Entity
+//@Entity
 @Getter
 @Setter
-@Table(name = "stringreponse")
+//@Table(name = "stringreponse")
 @NoArgsConstructor
 @AllArgsConstructor
 public class StringReponse {

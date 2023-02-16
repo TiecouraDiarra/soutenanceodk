@@ -34,7 +34,7 @@ public class ParcoursController {
     @Autowired
     private NiveauParcoursRepository niveauParcoursRepository;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/ajouter/{id_niveauparcours}")
     public Object Ajouter(@Param("nomparcours") String nomparcours, @Param("description") String description,
                           @Param("titre") String titre,
@@ -104,7 +104,7 @@ public class ParcoursController {
         return "Modification reussie avec succès";
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/supprimer/{id_parcours}")
     public String Supprimer(@PathVariable("id_parcours") Long id_parcours){
 

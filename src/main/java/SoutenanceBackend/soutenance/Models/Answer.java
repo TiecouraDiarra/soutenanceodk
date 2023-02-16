@@ -8,10 +8,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-@Entity
+//@Entity
 @Getter
 @Setter
-@Table(name = "answer")
+//@Table(name = "answer")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Answer {
