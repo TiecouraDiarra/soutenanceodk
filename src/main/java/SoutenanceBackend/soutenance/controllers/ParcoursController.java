@@ -56,7 +56,8 @@ public class ParcoursController {
 
         String photo = StringUtils.cleanPath(imageparcours.getOriginalFilename());
         parcours.setImageparcours(photo);
-        String uploaDir = "C:\\Users\\tddiarra\\Downloads\\Soutenance\\Front\\FrontCarriPlan\\src\\assets\\imgs\\parcours";
+        //String uploaDir = "C:\\Users\\tddiarra\\Downloads\\Soutenance\\Front\\FrontCarriPlan\\src\\assets\\imgs\\parcours";
+        String uploaDir = "C:\\xampp1\\htdocs\\Carriplan\\images\\parcours";
         ConfigImage.saveimg(uploaDir, photo, imageparcours);
 
 

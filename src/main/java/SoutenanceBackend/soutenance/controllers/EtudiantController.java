@@ -113,7 +113,7 @@ public class EtudiantController {
             etudiant.setSerieLycee(serieLycee);
             etudiant.setRoles(roles);
             etudiantRepository.save(etudiant);
-            mailSender.send(emailConstructor.constructNewUserEmail(etudiant));
+            //mailSender.send(emailConstructor.constructNewUserEmail(etudiant));
 
             return ResponseEntity.ok(new MessageResponse(etudiant.getNomcomplet() + " ajouté avec succès !"));
         }else {

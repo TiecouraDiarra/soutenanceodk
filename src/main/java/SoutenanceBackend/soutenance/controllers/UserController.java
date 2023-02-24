@@ -1,19 +1,15 @@
 package SoutenanceBackend.soutenance.controllers;
 
-import SoutenanceBackend.soutenance.Models.Eleve;
-import SoutenanceBackend.soutenance.Models.Etudiant;
-import SoutenanceBackend.soutenance.Models.User;
-import SoutenanceBackend.soutenance.Models.professionnel;
-import SoutenanceBackend.soutenance.Repository.EleveRepository;
-import SoutenanceBackend.soutenance.Repository.EtudiantRepository;
-import SoutenanceBackend.soutenance.Repository.ProfessionnelRepository;
-import SoutenanceBackend.soutenance.Repository.UserRepository;
+import SoutenanceBackend.soutenance.Models.*;
+import SoutenanceBackend.soutenance.Repository.*;
 import SoutenanceBackend.soutenance.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static SoutenanceBackend.soutenance.Models.ERole.ROLE_ADMIN;
 
 @CrossOrigin(origins ={"http://localhost:4200", "http://localhost:8100"}, maxAge = 3600, allowCredentials = "true")
 @RestController
@@ -28,6 +24,9 @@ public class UserController {
         private EleveRepository eleveRepository;
 
     @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
     private ProfessionnelRepository professionnelRepository;
 
     @Autowired
@@ -39,11 +38,11 @@ public class UserController {
 
         // µµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµ
 
-        @PreAuthorize("hasRole('USER') or hasRole('COLLABORATEUR') or hasRole('ADMIN')")
-        @GetMapping("/afficher")
+        //@PreAuthorize("hasRole('USER') or hasRole('COLLABORATEUR') or hasRole('ADMIN')")
+        @GetMapping("/afficherUser")
         public List<User> AfficherUsers(){
             // LOG.info("userService.Afficher()");
-            return userService.Afficher();
+            return userRepository.findAll();
         }
 
         // µµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµµ   MODIFIER
@@ -89,6 +88,12 @@ public class UserController {
         return etudiantRepository.findAll();
     }
 
+    @GetMapping("/afficherRole")
+    public List<Role> AfficherRole(){
+        // LOG.info("userService.Afficher()");
+        return roleRepository.findAll();
+    }
+
     @GetMapping("/afficherProfessionnel")
     public List<professionnel> AfficherProfessionnel(){
         // LOG.info("userService.Afficher()");
@@ -98,7 +103,8 @@ public class UserController {
     @GetMapping("/afficherAdmin")
     public List<User> AfficherAdmin(){
         // LOG.info("userService.Afficher()");
-        return userRepository.AfficherAdmin();
+
+        return userRepository.findByRoles(new Role(ROLE_ADMIN));
     }
 
 }

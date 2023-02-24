@@ -37,4 +37,18 @@ public interface AutoevaluationRepository extends JpaRepository<Autoevaluation, 
     public void INSERTPARCOUAUTO(@Param("auto_id") Long auto_id, @Param("parcours_id") Long parcours_id);
 
 
+    //LES QUATRES DERNIERES AUTOEVALUATIONS
+    @Query(value = "SELECT ae.*\n" +
+            "FROM autoevaluation ae\n" +
+            "INNER JOIN (\n" +
+            "   SELECT id_utilisateur, MAX(dateauto) AS last_autoevaluation\n" +
+            "   FROM autoevaluation\n" +
+            "   GROUP BY id_utilisateur\n" +
+            "   ORDER BY last_autoevaluation DESC\n" +
+            "   LIMIT 4\n" +
+            ") last_ae\n" +
+            "ON ae.id_utilisateur = last_ae.id_utilisateur AND ae.dateauto = last_ae.last_autoevaluation;",nativeQuery = true)
+    List<Autoevaluation> QuatreAutoevaluationRecente();
+
+
 }

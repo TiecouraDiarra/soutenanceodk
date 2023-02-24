@@ -122,7 +122,7 @@ public class EleveController {
             //user.setRoles(roles);
             //userRepository.save(user);
             eleveRepository.save(eleve);
-            mailSender.send(emailConstructor.constructNewUserEmail(eleve));
+            //mailSender.send(emailConstructor.constructNewUserEmail(eleve));
 
             return ResponseEntity.ok(new MessageResponse(eleve.getNomcomplet() + " ajouté avec succès !"));
         }else {

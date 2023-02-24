@@ -64,4 +64,6 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     @Transactional
     @Query(value = "SELECT * FROM `question` WHERE question.id_typequestion=8;",nativeQuery = true)
     List<Question> QuestionTSS();
+
+    List<Question> findByTypeQuestion(String nomtypequestion);
 }

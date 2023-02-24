@@ -65,6 +65,45 @@ public interface ReponseRepository extends JpaRepository<Reponse, Long> {
             "AND typematiere.nomtypematiere =:typematiere", nativeQuery = true)
     Long NoteTSEXP(Long id, Long idauto, String typematiere);
 
+    //REQUETTE ERMETTANT DE CALCULER LES NOTES DES ELEVES EN TSECO ECONOMIE
+    @Query(value = "SELECT SUM(reponse) FROM " +
+            "users,question,reponse,autoevaluation,auto_reponse,typematiere " +
+            "WHERE users.id=autoevaluation.id_utilisateur " +
+            "AND autoevaluation.id=auto_reponse.auto_id " +
+            "AND auto_reponse.reponse_id=reponse.id " +
+            "AND question.id_type_matiere=typematiere.id " +
+            "AND question.id=reponse.id_question " +
+            "AND users.id=:id " +
+            "AND autoevaluation.id =:idauto " +
+            "AND typematiere.nomtypematiere =:typematiere", nativeQuery = true)
+    Long NoteTSECOECONOMIE(Long id, Long idauto, String typematiere);
+
+    //REQUETTE ERMETTANT DE CALCULER LES NOTES DES ELEVES EN TSECO GEOGRAPHIE
+    @Query(value = "SELECT SUM(reponse) FROM " +
+            "users,question,reponse,autoevaluation,auto_reponse,typematiere " +
+            "WHERE users.id=autoevaluation.id_utilisateur " +
+            "AND autoevaluation.id=auto_reponse.auto_id " +
+            "AND auto_reponse.reponse_id=reponse.id " +
+            "AND question.id_type_matiere=typematiere.id " +
+            "AND question.id=reponse.id_question " +
+            "AND users.id=:id " +
+            "AND autoevaluation.id =:idauto " +
+            "AND typematiere.nomtypematiere =:typematiere", nativeQuery = true)
+    Long NoteTSECOGEOGRAPHIE(Long id, Long idauto, String typematiere);
+
+    //REQUETTE ERMETTANT DE CALCULER LES NOTES DES ELEVES EN TSECO COMPTABILITE
+    @Query(value = "SELECT SUM(reponse) FROM " +
+            "users,question,reponse,autoevaluation,auto_reponse,typematiere " +
+            "WHERE users.id=autoevaluation.id_utilisateur " +
+            "AND autoevaluation.id=auto_reponse.auto_id " +
+            "AND auto_reponse.reponse_id=reponse.id " +
+            "AND question.id_type_matiere=typematiere.id " +
+            "AND question.id=reponse.id_question " +
+            "AND users.id=:id " +
+            "AND autoevaluation.id =:idauto " +
+            "AND typematiere.nomtypematiere =:typematiere", nativeQuery = true)
+    Long NoteTSECOCOMPTABILITE(Long id, Long idauto, String typematiere);
+
     //REQUETTE ERMETTANT DE CALCULER LES NOTES DES ELEVES EN TLL LV1
     @Query(value = "SELECT SUM(reponse) FROM " +
             "users,question,reponse,autoevaluation,auto_reponse,typematiere " +

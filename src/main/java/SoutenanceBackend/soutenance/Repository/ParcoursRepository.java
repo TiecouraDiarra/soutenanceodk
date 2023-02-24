@@ -166,6 +166,22 @@ public interface ParcoursRepository extends JpaRepository<Parcours, Long> {
             "AND niveauparcours.id=3;",nativeQuery = true)
     List<Parcours> ParcoursEtudiantTSSHISTOIRE();
 
+    //PARCOURS POUR LES TSECO ECONOMIE
+    @Modifying
+    @Transactional
+    @Query(value = "SELECT * FROM `parcours`, `niveauparcours` \n" +
+            "WHERE (parcours.type='ECONOMIE') \n" +
+            "AND niveauparcours.id=3;",nativeQuery = true)
+    List<Parcours> ParcoursEtudiantTSECOECONOMIE();
+
+    //PARCOURS POUR LES TSECO COMPTABILITE
+    @Modifying
+    @Transactional
+    @Query(value = "SELECT * FROM `parcours`, `niveauparcours` \n" +
+            "WHERE (parcours.type='COMPTABILITE') \n" +
+            "AND niveauparcours.id=3;",nativeQuery = true)
+    List<Parcours> ParcoursEtudiantTSECOCOMPTABILITE();
+
     //PARCOURS POUR LES TSS GEOGRAPHIE
     @Modifying
     @Transactional

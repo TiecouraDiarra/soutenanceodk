@@ -366,9 +366,32 @@ public class AutoevaluationController {
         }
         //LA CONDITION PERMETTANT DE VERIFIER LA SERIE D'UN ETUDIANT TSECO
         else if (etudiant.getSerieLycee().getNomserie().equals("TSECO")) {
-            return null;
+            //TOTAL NOTE TSECO ECONOMIE
+            Long TotalNoteEtudiantTSECOECONOMIE = reponseRepository.NoteTSECOECONOMIE(Id, idauto, "TSECOECONOMIE");
+
+            //TOTAL NOTE TSECO GEOGRAPHIE
+            Long TotalNoteEtudiantTSECOGEOGRAPHIE = reponseRepository.NoteTSECOGEOGRAPHIE(Id, idauto, "TSECOGEOGRAPHIE");
+
+            //TOTAL NOTE TSECO COMPTABILITE
+            Long TotalNoteEtudiantTSECOCOMPTABILITE = reponseRepository.NoteTSECOCOMPTABILITE(Id, idauto, "TSECOCOMPTABILITE");
+            if (TotalNoteEtudiantTSECOECONOMIE >= TotalNoteEtudiantTSECOGEOGRAPHIE && TotalNoteEtudiantTSECOECONOMIE >= TotalNoteEtudiantTSECOCOMPTABILITE) {
+                for (Parcours parcours : parcoursRepository.ParcoursEtudiantTSECOECONOMIE()) {
+                    autoevaluationRepository.INSERTPARCOUAUTO(idauto, parcours.getId());
+                }
+                return parcoursRepository.ParcoursEtudiantTSECOECONOMIE();
+            } else if (TotalNoteEtudiantTSECOGEOGRAPHIE >= TotalNoteEtudiantTSECOECONOMIE && TotalNoteEtudiantTSECOGEOGRAPHIE >= TotalNoteEtudiantTSECOCOMPTABILITE) {
+                for (Parcours parcours : parcoursRepository.ParcoursEtudiantTSSGEOGRAPHIE()) {
+                    autoevaluationRepository.INSERTPARCOUAUTO(idauto, parcours.getId());
+                }
+                return parcoursRepository.ParcoursEtudiantTSSGEOGRAPHIE();
+            } else {
+                for (Parcours parcours : parcoursRepository.ParcoursEtudiantTSECOCOMPTABILITE()) {
+                    autoevaluationRepository.INSERTPARCOUAUTO(idauto, parcours.getId());
+                }
+                return parcoursRepository.ParcoursEtudiantTSECOCOMPTABILITE();
+            }
         }
-        //LA CONDITION PERMETTANT DE VERIFIER LA SERIE D'UN ETUDIANT TSEEXP
+        //LA CONDITION PERMETTANT DE VERIFIER LA SERIE D'UN ETUDIANT TSEXP
         else if (etudiant.getSerieLycee().getNomserie().equals("TSEXP")) {
 
             //TOTAL NOTE TSEXP
@@ -698,4 +721,9 @@ public class AutoevaluationController {
 
     }
 //==============================FIN PROFESSIONNEL=====================================================
+
+    @GetMapping("AutorecenteQuatreUser")
+    public List<Autoevaluation> AutorecenteUser(){
+        return autoevaluationRepository.QuatreAutoevaluationRecente();
+    }
 }

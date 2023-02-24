@@ -1,5 +1,7 @@
 package SoutenanceBackend.soutenance.Repository;
 
+import SoutenanceBackend.soutenance.Models.ERole;
+import SoutenanceBackend.soutenance.Models.Role;
 import SoutenanceBackend.soutenance.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -36,8 +38,8 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query(value = "SELECT COUNT(id) FROM `users`;", nativeQuery = true)
     Long nombreUserTotal();
 
-    @Query(value = "SELECT * FROM `user_roles`, `users` \n" +
-            "WHERE user_roles.user_id=users.id\n" +
-            "AND user_roles.role_id=2;", nativeQuery = true)
+    @Query(value = "SELECT * FROM `user_roles` WHERE user_roles.role_id=2;", nativeQuery = true)
     List<User> AfficherAdmin();
+
+    List<User> findByRoles(Role name);
 }

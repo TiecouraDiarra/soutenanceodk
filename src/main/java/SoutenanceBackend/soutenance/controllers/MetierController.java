@@ -45,7 +45,8 @@ public class MetierController {
 
         String photo = StringUtils.cleanPath(imagemetier.getOriginalFilename());
         metier.setImagemetier(photo);
-        String uploaDir = "C:\\Users\\tddiarra\\Downloads\\Soutenance\\Front\\FrontCarriPlan\\src\\assets\\imgs\\metiers";
+        //String uploaDir = "C:\\Users\\tddiarra\\Downloads\\Soutenance\\Front\\FrontCarriPlan\\src\\assets\\imgs\\metiers";
+        String uploaDir = "C:\\xampp1\\htdocs\\Carriplan\\images\\metiers";
         ConfigImage.saveimg(uploaDir, photo, imagemetier);
 
         // LOG.info("Ajouter avec succès");

@@ -129,4 +129,12 @@ public class QuestionController {
     public List<Question> AfficherQuestionTss(){
         return questionRepository.QuestionTSS();
     }
+
+    //AFFICHER FORMATION PAR DOMAINE
+    @GetMapping("/AfficherQuestionParType/{nomtypequestion}")
+    public Object AfficherQuestionParType(@PathVariable String nomtypequestion) {
+
+        List<Question> ppp = questionRepository.findByTypeQuestion(nomtypequestion);
+        return ppp;
+    }
 }
